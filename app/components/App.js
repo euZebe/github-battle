@@ -6,6 +6,9 @@ import Battle from "./Battle";
 import Popular from "./Popular";
 import Results from "./Results";
 import history from "./history";
+import Callback from "./Callback";
+import SecuredRoute from "./SecuredRoute";
+
 
 class App extends React.Component {
   render() {
@@ -15,8 +18,9 @@ class App extends React.Component {
           <Nav />
 
           <Switch>
+            <Route exact path="/callback" component={Callback} />
             <Route exact path="/" component={Home} />
-            <Route exact path="/battle" component={Battle} />
+            <SecuredRoute exact path="/battle" component={Battle} />
             <Route path="/battle/results" component={Results} />
             <Route path="/popular" component={Popular} />
             <Route render={() => <p>Not Found</p>} />

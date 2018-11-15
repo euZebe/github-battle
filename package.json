@@ -25,6 +25,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "auth0-js": "^9.8.2",
     "axios": "^0.18.0",
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",

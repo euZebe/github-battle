@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import auth0Client from "./Auth";
 
 function Nav() {
   return (
@@ -19,6 +20,17 @@ function Nav() {
           Popular
         </NavLink>
       </li>
+      {!auth0Client.isAuthenticated() && (
+        <li>
+          <button onClick={auth0Client.signIn}>Sign in</button>
+        </li>
+      )}
+      {auth0Client.isAuthenticated() && (
+        <div>
+          <label>{auth0Client.getProfile().name}</label>
+          <button onClick={auth0Client.signOut}>Sign Out</button>
+        </div>
+      )}
     </ul>
   );
 }
