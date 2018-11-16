@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Nav extends Component {
   login = () => this.props.auth.login();
@@ -11,7 +11,7 @@ class Nav extends Component {
 
     return (
       <header>
-        <ul className="nav">
+        <nav>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -22,16 +22,16 @@ class Nav extends Component {
             <Link to="/popular">Popular</Link>
           </li>
           {!isAuthenticated() && (
-            <li>
+            <li className="log-in-out-link">
               <a onClick={this.login}>Log In</a>
             </li>
           )}
           {isAuthenticated() && (
-            <li>
+            <li className="log-in-out-link">
               <a onClick={this.logout}>Log Out</a>
             </li>
           )}
-        </ul>
+        </nav>
       </header>
     );
   }
