@@ -1,7 +1,6 @@
 describe("home page", () => {
-  it("should contain a link to battle", () => {
-    cy.visit("/");
-    cy.get("[data-test=home_container] a").click();
-    cy.url().should("eq", `${Cypress.config().baseUrl}/battle`);
+  it("should be available to anonymous users", () => {
+    cy.visit("/home");
+    cy.get("[data-test=home_container] > a").should("have.attr", "href", "/battle"); // TODO: replace <a/> by a button => be resilient to dom changes
   });
 });
