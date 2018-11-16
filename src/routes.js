@@ -1,10 +1,9 @@
 import React from "react";
-import { Route, Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Nav from "./Nav";
-import Home from "./Home/Home";
+import Home from "./Pages/Home";
 import Callback from "./Callback/Callback";
 import Auth from "./Auth/Auth";
-import history from "./history";
 import Popular from "./Pages/Popular";
 import Battle from "./Pages/Battle";
 import Results from "./Pages/Results";
@@ -18,23 +17,31 @@ const handleAuthentication = ({ location }) => {
   }
 };
 
-export const makeMainRoutes = () => {
+const Routes = () => {
   return (
-    <Router history={history}>
-      <div className="container">
-        <Route path="/" render={props => <Nav auth={auth} {...props} />} />
-        <Route path="/home" render={props => <Home auth={auth} {...props} />} />
-        <Route path="/battle" exact component={withAuth(Battle, auth)} />
-        <Route path="/battle/results" component={withAuth(Results, auth)} />
-        <Route path="/popular" component={Popular} />
-        <Route
-          path="/callback"
-          render={props => {
-            handleAuthentication(props);
-            return <Callback {...props} />;
-          }}
-        />
+    <Router>
+      <div>
+        <Nav auth={auth} />
+
+        <main className="container">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/battle" exact component={withAuth(Battle, auth)} />
+            <Route path="/battle/results" component={withAuth(Results, auth)} />
+            <Route path="/popular" component={Popular} />
+            <Route
+              path="/callback"
+              render={props => {
+                handleAuthentication(props);
+                return <Callback {...props} />;
+              }}
+            />
+            <Route render={() => <div>Page not found</div>} />
+          </Switch>
+        </main>
       </div>
     </Router>
   );
 };
+
+export default Routes;

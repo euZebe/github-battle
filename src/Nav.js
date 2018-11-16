@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
-import "./App.css";
+import { Link } from 'react-router-dom';
 
 class Nav extends Component {
-  goTo = route => this.props.history.replace(`/${route}`);
-
   login = () => this.props.auth.login();
 
   logout = () => this.props.auth.logout();
@@ -13,27 +10,29 @@ class Nav extends Component {
     const { isAuthenticated } = this.props.auth;
 
     return (
-      <ul className="nav">
-        <li>
-          <a onClick={() => this.goTo("home")}>Home</a>
-        </li>
-        <li>
-          <a onClick={() => this.goTo("battle")}>Battle</a>
-        </li>
-        <li>
-          <a onClick={() => this.goTo("popular")}>Popular</a>
-        </li>
-        {!isAuthenticated() && (
+      <header>
+        <ul className="nav">
           <li>
-            <a onClick={this.login}>Log In</a>
+            <Link to="/">Home</Link>
           </li>
-        )}
-        {isAuthenticated() && (
           <li>
-            <a onClick={this.logout}>Log Out</a>
+            <Link to="/battle">Battle</Link>
           </li>
-        )}
-      </ul>
+          <li>
+            <Link to="/popular">Popular</Link>
+          </li>
+          {!isAuthenticated() && (
+            <li>
+              <a onClick={this.login}>Log In</a>
+            </li>
+          )}
+          {isAuthenticated() && (
+            <li>
+              <a onClick={this.logout}>Log Out</a>
+            </li>
+          )}
+        </ul>
+      </header>
     );
   }
 }
