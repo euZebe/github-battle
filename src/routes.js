@@ -11,9 +11,9 @@ import withAuth from "./withAuth";
 
 const auth = new Auth();
 
-const handleAuthentication = ({ location }) => {
+const handleAuthentication = ({ history, location }) => {
   if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication();
+    auth.handleAuthentication().then(() => history.goBack());
   }
 };
 

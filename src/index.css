@@ -92,6 +92,7 @@ nav {
 
 nav li {
   margin-right: 15px;
+  cursor: pointer;
 }
 
 nav :last-child {

@@ -6,7 +6,7 @@ export default function withAuth(WrappedComponent, auth) {
       return auth.isAuthenticated() ? (
         <WrappedComponent {...this.props} />
       ) : (
-        <a onClick={auth.login}>please login to access this page</a>
+        <h3><a onClick={auth.login} data-test="please_login_msg">please login to access this page</a></h3>
       );
     }
   };

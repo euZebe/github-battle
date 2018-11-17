@@ -41,7 +41,7 @@ class Loading extends React.Component {
     window.clearInterval(this.interval);
   }
   render() {
-    return <p style={styles.content}>{this.state.text}</p>;
+    return <p style={styles.content} id="loading">{this.state.text}</p>;
   }
 }
 

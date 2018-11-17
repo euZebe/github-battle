@@ -12,6 +12,7 @@ function SelectLanguage(props) {
           style={lang === props.selectedLanguage ? { color: "#d0021b" } : null}
           onClick={props.onSelect.bind(null, lang)}
           key={lang}
+          data-test="filters"
         >
           {lang}
         </li>
@@ -24,7 +25,7 @@ const RepoGrid = props => (
   <ul className="popular-list">
     {props.repos.map(function(repo, index) {
       return (
-        <li key={repo.name} className="popular-item">
+        <li key={repo.name} className="popular-item" data-test="popular-item">
           <div className="popular-rank">#{index + 1}</div>
           <ul className="space-list-items">
             <li>
