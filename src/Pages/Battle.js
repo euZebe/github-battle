@@ -35,7 +35,7 @@ class PlayerInput extends React.Component {
           {label}
         </label>
         <input
-          id="username"
+          data-test="username"
           placeholder="github username"
           type="text"
           value={this.state.username}

@@ -1,21 +1,21 @@
-const playerOne = "reactjs";
-const playerTwo = "angular";
-
-
 describe("battle page", () => {
-  it("should only allow the battle to begin when both users are settled", () => {
+  it("should require logging in", () => {
     cy.visit("/battle");
-    cy.get("form input").first().type(playerOne);
-    cy.get("form button").first().click();
-
-    cy.get('[data-test=submit_battle]').should('not.exist');
-
-    cy.get("form input").type(playerTwo);
-    cy.get("form button").click();
-
-    cy.get('[data-test=submit_battle]').click();
-    cy.url().should('eq', `${Cypress.config().baseUrl}/battle/results?playerOneName=${playerOne}&playerTwoName=${playerTwo}`)
+    cy.get("[data-test=please_login_msg]");
   });
 
-  it("should display an error when a user in invalid");
+  it('should allow to start a battle when logged in', () => {
+    cy.login();
+    cy.visit('/battle');
+    cy.get('form');
+    cy.get('[data-test=username]').first().type('react');
+    cy.get('button[type=submit]').first().click();
+    cy.get('[data-test=username]').first().type('vue');
+    cy.get('button[type=submit]').first().click();
+
+    cy.get('[data-test=submit_battle]').click(); // starting battle
+    cy.url().should('eq', `${Cypress.config().baseUrl}/battle/results?playerOneName=react&playerTwoName=vue`);
+    cy.get('[data-test=submitted_player]').should('have.length', 2);
+    // Note: checking the way a player card is displayed is none of the e2e business
+  });
 });

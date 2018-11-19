@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function PlayerPreview(props) {
   return (
-    <div data-test={`submittedPlayer_${props.username}`}>
+    <div data-test="submitted_player">
       <div className="column">
         <img
           className="avatar"
