@@ -25,6 +25,9 @@
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
     "cy:verify": "cypress verify",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages --dist build",
+    "deploy:travis": "gh-pages --dist build --repo https://$GITHUB_TOKEN@github.com/euzebe/github-battle.git"
   }
 }
