@@ -14,8 +14,6 @@ cache:
     - npm run cy:verify
 
 before_script:
-    #   ## print all Travis environment variables for debugging
-    - $(npm bin)/print-env TRAVIS
     - npm start &
 script:
     - npm run cy:run -- --record
