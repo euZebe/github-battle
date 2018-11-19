@@ -21,9 +21,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --passWithNoTests --testPathPattern ./src\/.*",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:verify": "cypress verify",
+    "cy:run": "cypress run",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages --dist build",
+    "deploy:travis": "gh-pages --dist build --repo https://$GITHUB_TOKEN@github.com/euzebe/github-battle.git"
   }
 }
