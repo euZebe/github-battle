@@ -28,6 +28,6 @@
     "cy:run": "cypress run"
   },
   "jest": {
-    "testPathIgnorePatterns": ["<rootDir>/cypress/"]
+    "testPathIgnorePatterns": ["<rootDir>/cypress/", "cypress/"]
   }
 }
