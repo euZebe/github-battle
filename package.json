@@ -21,13 +21,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --passWithNoTests --testPathPattern ./src\/.*",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
     "cy:verify": "cypress verify",
     "cy:run": "cypress run"
-  },
-  "jest": {
-    "testPathIgnorePatterns": ["<rootDir>/cypress/", "cypress/"]
   }
 }
