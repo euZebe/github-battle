@@ -71,6 +71,12 @@
 # 🛠 What if we tested our front-end?
 .footnote[Jean Martineau-Figuette]
 ---
+## Why?
+
+???
+- prevent regression
+- allow refactoring without unexpected side effect => clean code
+---
 ## tests overview 🔭
 ---
 ![Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)](resources/tests-pyramid.png)
@@ -121,26 +127,45 @@ Selenium: 2004
 ### Con(s)
 - only Chrome is supported... until now (working examples with Firefox, edge, IE11, mobile safari and Android) [[link]](https://github.com/cypress-io/cypress/issues/310)
 ---
-### What does it look like?
+### Let's write tests !!
 
-```javascript
-it('should allow to submit form using "enter"', () => {
-  cy.fixture('aUser.json').then(({ email, password }) => { // use fixture
-    cy.get('input[name="login"]').type(email);
-    cy.get('input[name="password"]').type(`${password}{enter}`);
-    cy.url().should('eq', `${Cypress.config().baseUrl}/`);
-  });
-});
+???
+- introduce Github battle features
+- write popular test
+    - Mocha skeleton: describe, it, tests name, skip, only, beforeEach
+        - also: sinonjs for stub / spy
+    - chai: assertions (count filters=6, count popular-item=30, #loading when filtering)
+        -> strategy: select on IDs and meta-attributes (data-test)
+    - commands !== promises
+    - automatic waiting
+    - introduce cy:open (step-by-step, logs)
+    - debugger
+    - inspect => step info in console
 
-```
+- show battle test
+    - wrap commands in a single function / custom command to express the intent => readable by a PO
+    - test strategy: don't repeat yourself (test UI once - if not 3rd party, then bypass front) => commands
+    - back-end can be mocked (example: simulate session expiration)
+    - time jump
+
+- CI
+    - available CI
+    - cypress run
+    - videos
+    - screenshots
+    - reports format
+    - dashboard => parallel tests, private results
 ---
-### Tester side
-- Mocha, chai, sinonjs
-- automatic waiting
-- back-end can be mocked
-- front-end can be bypassed
-  - _DEMO: battle.spec.js => cy.login()_,
-- groups of commands can be factorized to make test less verbose
+### strategies
+        - have some e2e tests using a real DB and validating nominal cases
+        - have integration tests mocking API calls to reduce execution time
+---
+### experience feedback
+- requires JS knowledge to write tests => dev/tester oriented tool
+- easy to read
+- great at testing and developing simultaneously (faster feedback loop)
+- explicit errors
+
 
 ???
 - Mocha: describe, it, common lifecycle hooks
