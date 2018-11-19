@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Let's talk e2e tests</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="resources/Yanone.css" />  
+    <link rel="stylesheet" href="resources/droid-serif.css" />
+    <link rel="stylesheet" href="resources/ubuntu-mono.css" />
+
+    <style type="text/css">
+        body {
+            color: #dddddd;
+        }
+        .remark-slide-content {
+            font-family: "DejaVu Sans";
+            background: #272822;
+            color: #aaa8a2;
+            /*text-shadow: 0 0 20px #333;*/
+        }
+        h1, h2, h3 {
+            color: #f3f3f3;
+            line-height: 0.8em;
+            font-family: 'Yanone Kaffeesatz';
+            font-weight: normal;
+            font-size: 60px !important;
+        }
+        .remark-code, .remark-inline-code {
+            font-family: 'Ubuntu Mono';
+            background-color: #ccc;
+            color: #111;
+            padding: 5px 10px 5px 10px;
+            border-radius: 5px;
+        }
+        .remark-code-line {
+            line-height: 1.6rem;
+        }
+        .footnote {
+            color: #e7e8e2;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+        }
+        .remark-slide-number {
+            font-family: monospace;
+            font-size: 1.5rem;
+            display: flex;
+            letter-spacing: 6px;
+            transform: rotate(90deg);
+            transform-origin: 100% 100%;
+            right: 40px;
+        }
+        .remark-slide-content {
+            font-size: 26px;
+            line-height: 40px;
+        }
+        .remark-slide-content:not(.regular) {
+            vertical-align: middle;
+        }
+        a[href] {
+            color: cornflowerblue;
+        }
+        .legend {
+            font-size: 15px;
+            display: block;
+        }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+# 🛠 What if we tested our front-end?
+.footnote[Jean Martineau-Figuette]
+---
+## tests overview 🔭
+---
+![Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)](resources/tests-pyramid.png)
+.legend[Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)]
+
+???
+define each test kind
+---
+### What is e2e test?
+---
+### Why is it painful?
+- Which test automation tool do you use ?
+- Otherwise, why don't you test?
+---
+### Main complaints
+- execution is (very) long
+- painful to write
+- painful to debug
+- which strategy ?
+---
+### Existing solutions
+- Selenium and its overlays (webdriver, nightwatch, Protractor...)
+- testCafe
+- Cypress
+
+???
+Selenium: 2004
+
+---
+## 🔍 Focus on Cypress
+---
+### What
+- a JS e2e framework
+- written from scratch
+- for QA engineers AND developers
+- easy to install, easy to use
+---
+### Under the hood
+- Cypress runs in the same run loop as your application [[link]](https://docs.cypress.io/guides/overview/key-differences.html#New-kind-of-testing) => Access to
+  - the code running on the page
+  - network traffic
+  - document
+  - window
+  - debugger
+- Cypress commands are asynchronous
+  - (⚠ but they are not promises)
+---
+### Con(s)
+- only Chrome is supported... until now (working examples with Firefox, edge, IE11, mobile safari and Android) [[link]](https://github.com/cypress-io/cypress/issues/310)
+---
+### What does it look like?
+
+```javascript
+it('should allow to submit form using "enter"', () => {
+  cy.fixture('aUser.json').then(({ email, password }) => { // use fixture
+    cy.get('input[name="login"]').type(email);
+    cy.get('input[name="password"]').type(`${password}{enter}`);
+    cy.url().should('eq', `${Cypress.config().baseUrl}/`);
+  });
+});
+
+```
+---
+### Tester side
+- Mocha, chai, sinonjs
+- automatic waiting
+- back-end can be mocked
+- front-end can be bypassed
+  - _DEMO: battle.spec.js => cy.login()_,
+- groups of commands can be factorized to make test less verbose
+
+???
+- Mocha: describe, it, common lifecycle hooks
+- _wait_ chez Selenium: rallonge les temps d'execution, ou risque d'échouer si trop court
+- back-end mocked: HTTP 401, avoid DB init
+- front-end mocked: skip login
+
+---
+### Developer side
+- `cypress open` mode
+    - inspect
+    - hot reload
+    - time travel
+    - element selector
+- step infos into console
+- debugger
+- fixtures
+- great at testing and developing simultaneously (faster feedback loop)
+- explicit errors: _back to deleteRegion.spec.js_
+
+---
+### CI side
+- works with all major CI (not to say every single CI)
+- headless mode with `cypress run`
+- videos of executed tests
+- screenshots of failures
+- reports: probably the format(s) you need
+---
+### What else? ☕
+- [typescript support](https://docs.cypress.io/guides/tooling/typescript-support.html#Transpiling-TypeScript-test-files)
+- dashboard (optional, free plan, paying options) :
+    - parallel tests,
+    - tests results stored privately / publicly
+- [Page Object pattern](https://docs.cypress.io/faq/questions/using-cypress-faq.html#Can-I-use-the-Page-Object-pattern)
+
+???
+Page Object Model's aim is to reduce code duplication ; not required since we can test a feature from UI, then do the same programmatically for better performances
+
+---
+### Good practices
+- [Cypress custom commands](https://docs.cypress.io/api/cypress-api/custom-commands.html)
+- test features from UI once
+- independent initial state for each test
+- selecting elements + example
+- visiting external websites + example
+
+---
+### resources
+- [testing strategies](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Testing-Strategies)
+- [Cypress best practices](https://docs.cypress.io/guides/references/best-practices.html)
+
+???
+- independent tests: can be run separately / in different order
+- custom commands for reusable behaviour, else basic functions
+
+---
+### Conclusion
+
+???
+- easy to read,
+- easy to write,
+- write tests and app code simultaneously
+
+---
+class: center, middle
+### Any question?
+### Thanks for you attention
+
+    </textarea>
+    <script src="resources/remark.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      function getChar(charIndex, current) {
+        if (charIndex <= current) return '⚫';
+        return '⚪';
+      }
+
+      const slideshow = remark.create({
+        slideNumberFormat: function (current, total) {
+          return Array(total)
+            .fill()
+            .map((_, i) => getChar(i + 1, current))
+            .join('')
+            ;
+        },
+      });
+    </script>
+  </body>
+</html>
