@@ -26,5 +26,8 @@
     "cy:open": "cypress open",
     "cy:verify": "cypress verify",
     "cy:run": "cypress run"
+  },
+  "jest": {
+    "testPathIgnorePatterns": ["<rootDir>/cypress/"]
   }
 }
