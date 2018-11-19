@@ -8,9 +8,9 @@ describe("battle page", () => {
     cy.login();
     cy.visit('/battle');
     cy.get('form');
-    cy.get('[data-test=username]').first().type('react');
+    cy.get('[data-test=username]').first().type('angular');
     cy.get('button[type=submit]').first().click();
-    cy.get('[data-test=username]').first().type('vue');
+    cy.get('[data-test=username]').first().type('vuejs');
     cy.get('button[type=submit]').first().click();
 
     cy.get('[data-test=submit_battle]').click(); // starting battle
