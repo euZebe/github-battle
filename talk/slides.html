@@ -112,14 +112,13 @@ Selenium: 2004
 - a JS e2e framework
 - written from scratch
 - for QA engineers AND developers
-- easy to install, easy to use
+- promises to be easy to install, easy to use
 ---
 ### Under the hood
-- Cypress runs in the same run loop as your application [[link]](https://docs.cypress.io/guides/overview/key-differences.html#New-kind-of-testing) => Access to
+- Cypress & app run [in the same run loop](https://docs.cypress.io/guides/overview/key-differences.html#New-kind-of-testing)
   - the code running on the page
   - network traffic
-  - document
-  - window
+  - _document_ and _window_ JS elements
   - debugger
 - Cypress commands are asynchronous
   - (⚠ but they are not promises)
@@ -149,85 +148,34 @@ Selenium: 2004
     - time jump
 
 - CI
-    - available CI
-    - cypress run
+    - available CI: show travis.yml and travis-ci.org
+    - cypress run => headless mode
     - videos
     - screenshots
     - reports format
     - dashboard => parallel tests, private results
 ---
 ### strategies
-        - have some e2e tests using a real DB and validating nominal cases
-        - have integration tests mocking API calls to reduce execution time
+- test login with UI, then bypass UI
+- keep tests independant (order shouldn't matter)
+- have some e2e tests using a real DB and validating nominal cases
+- have integration tests mocking API calls to reduce execution time
 ---
 ### experience feedback
-- requires JS knowledge to write tests => dev/tester oriented tool
-- easy to read
-- great at testing and developing simultaneously (faster feedback loop)
+- requires JS knowledge to write tests
+    - => dev/tester oriented tool
+- easy to write, easy to read
+    - => now we can focus on "what to test ?"
+- great at testing and developing simultaneously
+    - => TDD, faster feedback loop
 - explicit errors
 
-
-???
-- Mocha: describe, it, common lifecycle hooks
-- _wait_ chez Selenium: rallonge les temps d'execution, ou risque d'échouer si trop court
-- back-end mocked: HTTP 401, avoid DB init
-- front-end mocked: skip login
-
----
-### Developer side
-- `cypress open` mode
-    - inspect
-    - hot reload
-    - time travel
-    - element selector
-- step infos into console
-- debugger
-- fixtures
-- great at testing and developing simultaneously (faster feedback loop)
-- explicit errors: _back to deleteRegion.spec.js_
-
----
-### CI side
-- works with all major CI (not to say every single CI)
-- headless mode with `cypress run`
-- videos of executed tests
-- screenshots of failures
-- reports: probably the format(s) you need
----
-### What else? ☕
-- [typescript support](https://docs.cypress.io/guides/tooling/typescript-support.html#Transpiling-TypeScript-test-files)
-- dashboard (optional, free plan, paying options) :
-    - parallel tests,
-    - tests results stored privately / publicly
-- [Page Object pattern](https://docs.cypress.io/faq/questions/using-cypress-faq.html#Can-I-use-the-Page-Object-pattern)
-
-???
-Page Object Model's aim is to reduce code duplication ; not required since we can test a feature from UI, then do the same programmatically for better performances
-
----
-### Good practices
-- [Cypress custom commands](https://docs.cypress.io/api/cypress-api/custom-commands.html)
-- test features from UI once
-- independent initial state for each test
-- selecting elements + example
-- visiting external websites + example
 
 ---
 ### resources
 - [testing strategies](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Testing-Strategies)
 - [Cypress best practices](https://docs.cypress.io/guides/references/best-practices.html)
-
-???
-- independent tests: can be run separately / in different order
-- custom commands for reusable behaviour, else basic functions
-
----
-### Conclusion
-
-???
-- easy to read,
-- easy to write,
-- write tests and app code simultaneously
+- [key differences with Selenium](https://docs.cypress.io/guides/overview/key-differences.html#Architecture)
 
 ---
 class: center, middle
