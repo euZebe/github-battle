@@ -85,9 +85,16 @@
 ???
 define each test kind
 ---
-### What is e2e test?
+### unit tests
+TODO: general definition, example in UI context
 ---
-### Why is it painful?
+### integration tests
+TODO: general definition, example in UI context
+---
+### e2e tests
+TODO: general definition, example in UI context
+---
+### Why are e2e considered as painful?
 - Which test automation tool do you use ?
 - Otherwise, why don't you test?
 ---
@@ -125,6 +132,7 @@ Selenium: 2004
 ---
 ### Con(s)
 - only Chrome is supported... until now (working examples with Firefox, edge, IE11, mobile safari and Android) [[link]](https://github.com/cypress-io/cypress/issues/310)
+- cross-browser support is roadmap's top priority
 ---
 ### Let's write tests !!
 
@@ -157,7 +165,7 @@ Selenium: 2004
 ---
 ### strategies
 - test login with UI, then bypass UI
-- keep tests independant (order shouldn't matter)
+- keep tests independant: tests should pass in isolation
 - have some e2e tests using a real DB and validating nominal cases
 - have integration tests mocking API calls to reduce execution time
 ---
@@ -166,13 +174,15 @@ Selenium: 2004
     - => dev/tester oriented tool
 - easy to write, easy to read
     - => now we can focus on "what to test ?"
-- great at testing and developing simultaneously
+- great for everyday development
     - => TDD, faster feedback loop
 - explicit errors
 
 
 ---
 ### resources
+- [Next Generation Web Application End to End Testing](https://www.youtube.com/watch?v=CkGQ0fFH3yE)
+- [Cypress video tutorials](https://docs.cypress.io/examples/examples/tutorials.html)
 - [testing strategies](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Testing-Strategies)
 - [Cypress best practices](https://docs.cypress.io/guides/references/best-practices.html)
 - [key differences with Selenium](https://docs.cypress.io/guides/overview/key-differences.html#Architecture)
