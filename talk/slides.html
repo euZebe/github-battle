@@ -63,6 +63,9 @@
             font-size: 15px;
             display: block;
         }
+        img {
+            max-width: 100%;
+        }
     </style>
   </head>
   <body>
@@ -71,19 +74,16 @@
 # 🛠 What if we tested our front-end?
 .footnote[Jean Martineau-Figuette]
 ---
-## Why?
-
-???
-- prevent regression
-- allow refactoring without unexpected side effect => clean code
----
 ## tests overview 🔭
 ---
 ![Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)](resources/tests-pyramid.png)
 .legend[Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)]
 
 ???
-define each test kind
+- define each test kind, its goal (function/component, components interactions, user scenario)
+
+- prevent regression
+- allow refactoring without unexpected side effect => clean code
 ---
 ### unit tests
 TODO: general definition, example in UI context
