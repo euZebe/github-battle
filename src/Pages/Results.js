@@ -91,7 +91,7 @@ export default class Results extends React.Component {
     if (error) {
       return (
         <div>
-          <p>{error}</p>
+          <p data-test="error_msg">{error}</p>
           <Link to="/battle">Reset</Link>
         </div>
       );

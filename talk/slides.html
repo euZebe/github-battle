@@ -87,7 +87,7 @@
 ---
 ### What is e2e test?
 ---
-### Why is it painful?
+### Why are e2e tests painful?
 - Which test automation tool do you use ?
 - Otherwise, why don't you test?
 ---
@@ -95,6 +95,7 @@
 - execution is (very) long
 - painful to write
 - painful to debug
+- false-positive
 - which strategy ?
 ---
 ### Existing solutions
@@ -110,6 +111,7 @@ Selenium: 2004
 ---
 ### What
 - a JS e2e framework
+- independent of any framework or library,
 - written from scratch
 - for QA engineers AND developers
 - promises to be easy to install, easy to use
@@ -130,22 +132,26 @@ Selenium: 2004
 
 ???
 - introduce Github battle features
-- write popular test
-    - Mocha skeleton: describe, it, tests name, skip, only, beforeEach
-        - also: sinonjs for stub / spy
-    - chai: assertions (count filters=6, count popular-item=30, #loading when filtering)
-        -> strategy: select on IDs and meta-attributes (data-test)
-    - commands !== promises
-    - automatic waiting
-    - introduce cy:open (step-by-step, logs)
-    - debugger
-    - inspect => step info in console
+- write battle test
+    - Mocha
+    - should require login: select on html+class
+        => be resilient to changes by using id and data-test
+        => change to data-test
+    - should allow to start a battle when logged in
+        - explain login: don't test 3rd-party ; if internal login, test UI once, then bypass front
+        => strategy: maybe you should not test data displayed ; isn't it a unit test job ?
+        - speak about chai
+        - introduce cy:open (step-by-step, logs)
+        - automatic waiting
+    - should display an error when receiving an error from the API
 
-- show battle test
     - wrap commands in a single function / custom command to express the intent => readable by a PO
     - test strategy: don't repeat yourself (test UI once - if not 3rd party, then bypass front) => commands
+    - debugger
+    - inspect => step info in console
     - back-end can be mocked (example: simulate session expiration)
     - time jump
+
 
 - CI
     - available CI: show travis.yml and travis-ci.org
@@ -153,10 +159,13 @@ Selenium: 2004
     - videos
     - screenshots
     - reports format
-    - dashboard => parallel tests, private results
+    - dashboard
+        => parallel tests, private results
+
 ---
 ### strategies
 - test login with UI, then bypass UI
+- write change-resistant tests
 - keep tests independant (order shouldn't matter)
 - have some e2e tests using a real DB and validating nominal cases
 - have integration tests mocking API calls to reduce execution time

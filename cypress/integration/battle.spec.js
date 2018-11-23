@@ -1,5 +1,3 @@
-const playerOne = "angular";
-const playerTwo = "vuejs";
 
 describe("battle page", () => {
   it("should require logging in", () => {
@@ -11,14 +9,35 @@ describe("battle page", () => {
     cy.login();
     cy.visit('/battle');
     cy.get('form');
-    cy.get('[data-test=username]').first().type(playerOne);
+    cy.fixture("players").then(({ playerOne, playerTwo })=> {
+      cy.get('[data-test=username]').first().type(playerOne);
+      cy.get('button[type=submit]').first().click();
+      cy.get('[data-test=username]').first().type(playerTwo);
+      cy.get('button[type=submit]').first().click();
+
+      cy.get('[data-test=submit_battle]').click(); // starting battle
+      cy.url().should('match', /\/battle\/results/);
+    });
+  });
+
+  it.only('shoud display an error when asking for an invalid user', () => {
+    const mockedUser = 'reactjs';
+    cy.server();
+    cy.route({
+      method: 'GET',
+      url: /api.github.com\/users/,
+      status: 404,
+      delay: 1000,
+      response: {}
+    });
+    cy.login();
+    cy.visit('/battle');
+    cy.get('[data-test=username]').first().type(mockedUser);
     cy.get('button[type=submit]').first().click();
-    cy.get('[data-test=username]').first().type(playerTwo);
+    cy.get('[data-test=username]').first().type(mockedUser);
     cy.get('button[type=submit]').first().click();
 
     cy.get('[data-test=submit_battle]').click(); // starting battle
-    cy.url().should('eq', `${Cypress.config().baseUrl}/battle/results?playerOneName=${playerOne}&playerTwoName=${playerTwo}`);
-    cy.get('[data-test=submitted_player]').should('have.length', 2);
-    // Note: checking the way a player card is displayed is none of the e2e business
-  });
+    cy.get('[data-test=error_msg]');
+  })
 });

@@ -57,10 +57,10 @@ SelectLanguage.propTypes = {
 };
 
 class Popular extends React.Component {
-
   state = {
     selectedLanguage: "All",
-    repos: null
+    repos: null,
+    error: null
   };
 
   componentDidMount() {
@@ -68,34 +68,27 @@ class Popular extends React.Component {
   }
 
   updateLanguage = lang => {
-    this.setState({
-      selectedLanguage: lang,
-      repos: null
-    });
+    this.setState({ selectedLanguage: lang, repos: null });
 
-    api.fetchPopularRepos(lang).then(
-      function(repos) {
-        this.setState(function() {
-          return {
-            repos: repos
-          };
-        });
-      }.bind(this)
-    );
+    api
+      .fetchPopularRepos(lang)
+      .then(repos => {
+        this.setState({ repos: repos });
+      })
+      .catch(({ response }) => this.setState({ error: response.data.message }));
   };
 
   render() {
-    return (
+    const { selectedLanguage, repos, error } = this.state;
+    return error ? (
+      <h3 data-test="error_msg">ERROR: {error}</h3>
+    ) : (
       <div>
         <SelectLanguage
-          selectedLanguage={this.state.selectedLanguage}
+          selectedLanguage={selectedLanguage}
           onSelect={this.updateLanguage}
         />
-        {!this.state.repos ? (
-          <Loading />
-        ) : (
-          <RepoGrid repos={this.state.repos} />
-        )}
+        {!repos ? <Loading /> : <RepoGrid repos={repos} />}
       </div>
     );
   }
