@@ -86,35 +86,28 @@
 - allow refactoring without unexpected side effect => clean code
 ---
 ### unit tests
-TODO: general definition, example in UI context
+- test pure functions, components (data they render, callback they call when we interact with them)
+... TODO
+
 ---
 ### integration tests
 TODO: general definition, example in UI context
 ---
 ### e2e tests
-TODO: general definition, example in UI context
+- act as a real user
+- test main scenarios (or more if the app is not huge)
+- /!\ more expensive (needs a whole infrastructure available)
+    - => Do we need to check all permutations, like we did in the unit test? No! We already checked that in the unit tests. What we check in the E2E tests is not that this unit works, or that unit works, but rather that they all work together.
+
 ---
 ### Why are e2e considered painful?
-- Which test automation tool do you use ?
-- Otherwise, why don't you test?
----
-### Main complaints
 - execution is (very) long
 - painful to write
 - painful to debug
-- false-positive
-- which strategy ?
+- which strategy to adopt ?
 ---
-### Existing solutions
-- Selenium and its overlays (webdriver, nightwatch, Protractor...)
-- testCafe
-- Cypress
-
-???
-Selenium: 2004
-
----
-## 🔍 Focus on Cypress
+## 🔍 Let's focus on Cypress
+How does it answer to those complaints ?
 ---
 ### What
 - a JS e2e framework
@@ -122,6 +115,13 @@ Selenium: 2004
 - written from scratch
 - for QA engineers AND developers
 - promises to be easy to install, easy to use
+---
+### What for ?
+- end-to-end tests (act as a user)
+- specifically test the front-end
+
+
+
 ---
 ### Under the hood
 - Cypress & app run [in the same run loop](https://docs.cypress.io/guides/overview/key-differences.html#New-kind-of-testing)
@@ -150,7 +150,7 @@ Selenium: 2004
         => strategy: maybe you should not test data displayed ; isn't it a unit test job ?
         - speak about chai
         - introduce cy:open (step-by-step, logs)
-        - automatic waiting
+        - no "wait", no "retry"
     - should display an error when receiving an error from the API
 
     - wrap commands in a single function / custom command to express the intent => readable by a PO
@@ -159,7 +159,6 @@ Selenium: 2004
     - inspect => step info in console
     - back-end can be mocked (example: simulate session expiration)
     - time jump
-
 
 - CI
     - available CI: show travis.yml and travis-ci.org
@@ -177,6 +176,7 @@ Selenium: 2004
 - keep tests independant: tests should pass in isolation
 - have some e2e tests using a real DB and validating nominal cases
 - have integration tests mocking API calls to reduce execution time
+- do not test with e2e tests what you could easily test with unit tests
 ---
 ### experience feedback
 - requires JS knowledge to write tests
@@ -187,7 +187,8 @@ Selenium: 2004
     - => TDD, faster feedback loop
 - explicit errors
 
-
+???
+TODO: take "Why are e2e considered painful" slide and answer it step by step
 ---
 ### resources
 - [Next Generation Web Application End to End Testing](https://www.youtube.com/watch?v=CkGQ0fFH3yE)
