@@ -16,6 +16,18 @@ class Loading extends React.Component {
       text: props.text
     };
   }
+
+  static propTypes = {
+    text: PropTypes.string.isRequired,
+    speed: PropTypes.number.isRequired
+  };
+
+  static defaultProps = {
+    text: "Loading",
+    speed: 300
+  };
+
+
   componentDidMount() {
     const stopper = this.props.text + "...";
     this.interval = window.setInterval(
@@ -44,15 +56,5 @@ class Loading extends React.Component {
     return <p style={styles.content} id="loading">{this.state.text}</p>;
   }
 }
-
-Loading.propTypes = {
-  text: PropTypes.string.isRequired,
-  speed: PropTypes.number.isRequired
-};
-
-Loading.defaultProps = {
-  text: "Loading",
-  speed: 300
-};
 
 export default Loading;

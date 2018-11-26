@@ -20,7 +20,7 @@ describe("battle page", () => {
     });
   });
 
-  it.only('shoud display an error when asking for an invalid user', () => {
+  it('shoud display an error when asking for an invalid user', () => {
     const mockedUser = 'reactjs';
     cy.server();
     cy.route({
