@@ -12,21 +12,16 @@ class Battle extends React.Component {
   };
 
   handleSubmit = (id, username) => {
-    this.setState(() => {
-      const newState = {};
-      newState[id + "Name"] = username;
-      newState[id + "Image"] =
-        "https://github.com/" + username + ".png?size=200";
-      return newState;
+    this.setState({
+      [`${id}Name`]: username,
+      [`${id}Image`]: `https://github.com/${username}.png?size=200`
     });
   };
 
   handleReset = id => {
-    this.setState(() => {
-      const newState = {};
-      newState[id + "Name"] = "";
-      newState[id + "Image"] = null;
-      return newState;
+    this.setState({
+      [`${id}Name`]: "",
+      [`${id}Image`]: null
     });
   };
 
@@ -87,11 +82,7 @@ class Battle extends React.Component {
             className="button"
             to={{
               pathname: match.url + "/results",
-              search:
-                "?playerOneName=" +
-                playerOneName +
-                "&playerTwoName=" +
-                playerTwoName
+              search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
             }}
           >
             Battle
