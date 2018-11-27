@@ -66,6 +66,10 @@
         img {
             max-width: 100%;
         }
+        .centered {
+            display: block;
+            text-align: center;
+        }
     </style>
   </head>
   <body>
@@ -78,50 +82,69 @@
 ???
 speak about Gut.
 ---
-## ==> Let's automate our tests !
+## ➡ Let's automate our tests!
 - validate features
 - prevent regression
-- allow refactoring without unexpected side effect => reduce technical debt
+- allow refactoring without unexpected side effect ➡ reduce technical debt
 
 ---
 ## tests overview 🔭
 ---
-![Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)](resources/tests-pyramid.png)
-.legend[Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)]
+![Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dodds)](resources/tests-pyramid.png)
+.legend[Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dodds)]
 
 ---
 ### unit tests
-- test pure functions, components (data they render, callback they call when we interact with them)
-... TODO
+.centered[![unit tests](resources/run.gif)]
+---
+### what to unit test on front-end side ?
+- pure functions
+- components
+    - data they render
+    - interaction callbacks
+
 ???
 in component based approach, unit tests are fundamental since they guarantee components work in isolation
+
 ---
-### integration tests
-TODO: general definition, example in UI context
+### what about integration tests?
+.centered[![unit tests vs integration tests](http://i.freegifmaker.me/1/5/4/3/3/4/15433492481435734.gif)]
+---
+### what integration to test?
+- group of components with context
+- ...to boundaries of your front-end
+???
+unit test example: check a form feeds fields, then calls submit callback when button is clicked
+integration test example: check POST call
 ---
 ### e2e tests
 - act as a real user
-- test main scenarios (or more if the app is not huge)
-- /!\ more expensive (needs a whole infrastructure available)
-    - => Do we need to check all permutations, like we did in the unit test? No! We already checked that in the unit tests. What we check in the E2E tests is not that this unit works, or that unit works, but rather that they all work together.
+- check all app modules work together
+
+???
+➡ Do we need to check all permutations, rendered data ? Maybe not. We already checked that in the unit tests. What we check in the E2E tests is not that this unit works, or that unit works, but rather that they all work together.
 
 ---
 ### Why are e2e considered painful?
 - painful to write
 - painful to debug
-- often written after development (longer feedback loop)
+- longer feedback loop (often written after dev)
 - which strategy to adopt ?
 ---
 _Testing is not easy._
 
 _But with the help of right tools, writing tests can certainly be simpler and more fun._
+
+-- [Rajat S](https://blog.bitsrc.io/testing-react-apps-with-cypress-658bc482678)
 ---
 ## 🔍 Let's focus on Cypress
 How does it answer to those complaints ?
 ---
 ### What
 - a JS e2e framework
-- independent of any framework or library,
+- OS independent
+- framework / library independent
+- MIT license
 - written from scratch
 - for QA engineers AND developers
 - promises to be easy to install, easy to use
@@ -129,12 +152,12 @@ How does it answer to those complaints ?
 ---
 ### Under the hood
 - Cypress & app run [in the same run loop](https://docs.cypress.io/guides/overview/key-differences.html#New-kind-of-testing)
-  - the code running on the page (=> debugger)
+  - the code running on the page (➡ debugger)
   - network traffic
   - _document_ and _window_ JS elements
 ---
 ### Con(s)
-- only Chrome is supported... until now (working examples with Firefox, edge, IE11, mobile safari and Android) [[link]](https://github.com/cypress-io/cypress/issues/310)
+- only Chrome is supported... until now (working examples with Firefox, edge) [[link]](https://github.com/cypress-io/cypress/issues/310)
 - cross-browser support is roadmap's top priority
 ---
 ### Let's write tests !!
@@ -144,43 +167,42 @@ How does it answer to those complaints ?
 - write battle test
     - Mocha
     - should require login: select on html+class
-        => be resilient to changes by using id and data-test
-        => change to data-test
+        ➡ be resilient to changes by using id and data-test
+        ➡ change to data-test
     - should allow to start a battle when logged in
         - explain login: don't test 3rd-party ; if internal login, test UI once, then bypass front
-        => strategy: maybe you should not test data displayed ; isn't it a unit test job ?
+        ➡ strategy: maybe you should not test data displayed ; isn't it a unit test job ?
         - speak about chai
         - introduce cy:open (step-by-step, logs)
         - no "wait", no "retry"
     - should display an error when receiving an error from the API
 
-        - wrap commands in a single function / custom command to express the intent => readable by a PO
-        - test strategy: don't repeat yourself (test UI once - if not 3rd party, then bypass front) => commands
+        - wrap commands in a single function / custom command to express the intent ➡ readable by a PO
+        - test strategy: don't repeat yourself (test UI once - if not 3rd party, then bypass front) ➡ commands
         - debugger
-        - inspect => step info in console
+        - inspect ➡ step info in console
         - back-end can be mocked (example: simulate session expiration)
         - time jump
 
 - CI
     - available CI: show travis.yml and travis-ci.org
-    - cypress run => headless mode
+    - cypress run ➡ headless mode
     - videos
     - screenshots
     - reports format
     - dashboard
-        => parallel tests, private results
+        ➡ parallel tests, private results
 
 ---
 ### experience feedback
 - pleasant tool to write and read explicit tests
-    - => now we can focus on "what to test ?"
+    - ➡ now we can focus on "what to test ?"
 - great for everyday development
-    - => TDD, faster feedback loop
+    - ➡ TDD, faster feedback loop
 - explicit errors
 
----
-## note
-_writing tests, including e2e, is (also) your responsibility as a developer ; cypress can help you do it._
+???
+_Writing tests, including e2e, is (also) your responsibility as a developer. Cypress can help you do it._
 ---
 ### resources
 - [Next Generation Web Application End to End Testing](https://www.youtube.com/watch?v=CkGQ0fFH3yE)
@@ -188,6 +210,7 @@ _writing tests, including e2e, is (also) your responsibility as a developer ; cy
 - [testing strategies](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Testing-Strategies)
 - [Cypress best practices](https://docs.cypress.io/guides/references/best-practices.html)
 - [key differences with Selenium](https://docs.cypress.io/guides/overview/key-differences.html#Architecture)
+- https://www.youtube.com/watch?v=wApmbgPGmqQ
 
 ---
 class: center, middle
