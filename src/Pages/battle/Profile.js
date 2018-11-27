@@ -9,7 +9,6 @@ const Profile = ({ info }) => (
       {info.location && <li>{info.location}</li>}
       {info.company && <li>{info.company}</li>}
       <li>Followers: {info.followers}</li>
-      <li>Following: {info.following}</li>
       <li>Public Repos: {info.public_repos}</li>
       {info.blog && (
         <li>

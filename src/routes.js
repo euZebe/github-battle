@@ -3,7 +3,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Nav from "./Nav";
 import Home from "./Pages/Home";
 import Callback from "./Callback/Callback";
-import Auth from "./Auth/Auth";
+import Auth from "./utils/Auth";
 import Popular from "./Pages/Popular";
 import Battle from "./Pages/battle/Battle";
 import Results from "./Pages/battle/Results";
@@ -13,7 +13,7 @@ const auth = new Auth();
 
 const handleAuthentication = ({ history, location }) => {
   if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication().then(() => history.goBack());
+    auth.handleAuthentication().then(() => history.replace("/"));
   }
 };
 

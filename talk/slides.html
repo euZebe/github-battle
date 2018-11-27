@@ -74,16 +74,21 @@
 # 🛠 What if we tested our front-end?
 .footnote[Jean Martineau-Figuette]
 ---
+## once upon a time...
+???
+speak about Gut.
+---
+## ==> Let's automate our tests !
+- validate features
+- prevent regression
+- allow refactoring without unexpected side effect => reduce technical debt
+
+---
 ## tests overview 🔭
 ---
 ![Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)](resources/tests-pyramid.png)
 .legend[Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dotts)]
 
-???
-- define each test kind, its goal (function/component, components interactions, user scenario)
-
-- prevent regression
-- allow refactoring without unexpected side effect => clean code
 ---
 ### unit tests
 - test pure functions, components (data they render, callback they call when we interact with them)
@@ -102,9 +107,9 @@ TODO: general definition, example in UI context
 
 ---
 ### Why are e2e considered painful?
-- execution is (very) long
 - painful to write
 - painful to debug
+- often written after development (longer feedback loop)
 - which strategy to adopt ?
 ---
 > Testing is not easy.
@@ -120,22 +125,13 @@ How does it answer to those complaints ?
 - written from scratch
 - for QA engineers AND developers
 - promises to be easy to install, easy to use
----
-### What for ?
-- end-to-end tests (act as a user)
-- specifically test the front-end
-
-
 
 ---
 ### Under the hood
 - Cypress & app run [in the same run loop](https://docs.cypress.io/guides/overview/key-differences.html#New-kind-of-testing)
-  - the code running on the page
+  - the code running on the page (=> debugger)
   - network traffic
   - _document_ and _window_ JS elements
-  - debugger
-- Cypress commands are asynchronous
-  - (⚠ but they are not promises)
 ---
 ### Con(s)
 - only Chrome is supported... until now (working examples with Firefox, edge, IE11, mobile safari and Android) [[link]](https://github.com/cypress-io/cypress/issues/310)
@@ -158,12 +154,12 @@ How does it answer to those complaints ?
         - no "wait", no "retry"
     - should display an error when receiving an error from the API
 
-    - wrap commands in a single function / custom command to express the intent => readable by a PO
-    - test strategy: don't repeat yourself (test UI once - if not 3rd party, then bypass front) => commands
-    - debugger
-    - inspect => step info in console
-    - back-end can be mocked (example: simulate session expiration)
-    - time jump
+        - wrap commands in a single function / custom command to express the intent => readable by a PO
+        - test strategy: don't repeat yourself (test UI once - if not 3rd party, then bypass front) => commands
+        - debugger
+        - inspect => step info in console
+        - back-end can be mocked (example: simulate session expiration)
+        - time jump
 
 - CI
     - available CI: show travis.yml and travis-ci.org
@@ -175,22 +171,13 @@ How does it answer to those complaints ?
         => parallel tests, private results
 
 ---
-### strategies
-- test login with UI, then bypass UI
-- write change-resistant tests
-- keep tests independant: tests should pass in isolation
-- have some e2e tests using a real DB and validating nominal cases
-- have integration tests mocking API calls to reduce execution time
-- do not test with e2e tests what you could easily test with unit tests
----
 ### experience feedback
-- requires JS knowledge to write tests
-    - => dev/tester oriented tool
-- easy to write, easy to read
+- pleasant tool to write and read explicit tests
     - => now we can focus on "what to test ?"
 - great for everyday development
     - => TDD, faster feedback loop
 - explicit errors
+- writing tests (including e2e) is your responsibility as a developer
 
 ???
 TODO: take "Why are e2e considered painful" slide and answer it step by step
