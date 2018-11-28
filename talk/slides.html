@@ -44,7 +44,7 @@
             font-family: monospace;
             font-size: 1.5rem;
             display: flex;
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             transform: rotate(90deg);
             transform-origin: 100% 100%;
             right: 40px;
@@ -58,6 +58,13 @@
         }
         a[href] {
             color: cornflowerblue;
+            text-decoration: none;
+        }
+        a[href]::after {
+            content: '🔗';
+            font-size: 1rem;
+            position: relative;
+            top: -0.5rem;
         }
         .legend {
             font-size: 15px;
@@ -65,10 +72,17 @@
         }
         img {
             max-width: 100%;
+            border-radius: 20px;
         }
         .centered {
             display: block;
             text-align: center;
+        }
+        .manual {
+            position: relative;
+            top: -70px;
+            left: -10px;
+            font-family: cursive inherit;
         }
     </style>
   </head>
@@ -76,9 +90,9 @@
     <textarea id="source">
 
 # 🛠 What if we tested our front-end?
-.footnote[Jean Martineau-Figuette]
+.footnote[Jean Martineau-Figuette · @eu_zebe]
 ---
-## once upon a time...
+## ![](resources/O.png).manual[nce upon a time...]
 ???
 speak about Gut.
 ---
@@ -90,14 +104,13 @@ speak about Gut.
 ---
 ## tests overview 🔭
 ---
-![Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dodds)](resources/tests-pyramid.png)
-.legend[Testing Pyramid (source Martin Fowler, triangle authorship Kent C. Dodds)]
+![Testing Pyramid](resources/tests-pyramid.png)
 
 ---
 ### unit tests
 .centered[![unit tests](resources/run.gif)]
 ---
-### what to unit test on front-end side ?
+### What to unit test on front-end side?
 - pure functions
 - components
     - data they render
@@ -107,10 +120,10 @@ speak about Gut.
 in component based approach, unit tests are fundamental since they guarantee components work in isolation
 
 ---
-### what about integration tests?
+### integration tests
 .centered[![unit tests vs integration tests](http://i.freegifmaker.me/1/5/4/3/3/4/15433492481435734.gif)]
 ---
-### what integration to test?
+### What integration to test?
 - group of components with context
 - ...to boundaries of your front-end
 ???
@@ -140,7 +153,7 @@ _But with the help of right tools, writing tests can certainly be simpler and mo
 ## 🔍 Let's focus on Cypress
 How does it answer to those complaints ?
 ---
-### What
+### What is Cypress?
 - a JS e2e framework
 - OS independent
 - framework / library independent
@@ -150,15 +163,18 @@ How does it answer to those complaints ?
 - promises to be easy to install, easy to use
 
 ---
-### Under the hood
+### under the hood
 - Cypress & app run [in the same run loop](https://docs.cypress.io/guides/overview/key-differences.html#New-kind-of-testing)
   - the code running on the page (➡ debugger)
   - network traffic
   - _document_ and _window_ JS elements
 ---
-### Con(s)
-- only Chrome is supported... until now (working examples with Firefox, edge) [[link]](https://github.com/cypress-io/cypress/issues/310)
-- cross-browser support is roadmap's top priority
+### con(s)
+- only Chrome is supported... until now
+
+[(working examples with Firefox, edge, IE11)](https://github.com/cypress-io/cypress/issues/310)
+
+but cross-browser support is roadmap's top priority
 ---
 ### Let's write tests !!
 
@@ -201,8 +217,12 @@ How does it answer to those complaints ?
     - ➡ TDD, faster feedback loop
 - explicit errors
 
-???
-_Writing tests, including e2e, is (also) your responsibility as a developer. Cypress can help you do it._
+---
+### conclusions
+- Writing tests, including e2e, is (also) your responsibility as a developer.
+
+    Cypress can help you do it.
+
 ---
 ### resources
 - [Next Generation Web Application End to End Testing](https://www.youtube.com/watch?v=CkGQ0fFH3yE)
