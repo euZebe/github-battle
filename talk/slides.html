@@ -69,10 +69,6 @@
         position: relative;
         top: -0.5rem;
       }
-      .legend {
-        font-size: 15px;
-        display: block;
-      }
       img {
         max-width: 100%;
         border-radius: 20px;
@@ -87,11 +83,21 @@
         left: -10px;
         font-family: cursive inherit;
       }
-      .inline > img {
+      .cypress > img {
         display: inline;
         width: 50%;
         position: relative;
         top: 30px;
+      }
+      .twitter > img {
+        width: 2rem;
+        position: relative;
+        top: 0.5rem;
+        margin-right: 1rem;
+      }
+      p {
+        margin-block-end: 0.3rem;
+        margin-block-start: 0.3rem;
       }
     </style>
   </head>
@@ -99,7 +105,10 @@
     <textarea id="source">
 
 # 🛠 What if we tested our front-end?
-.footnote[Jean Martineau-Figuette ·· @jeanMartiF]
+.footnote[Jean Martineau-Figuette
+
+.twitter[![](resources/twitter.png)]@jeanMartiF
+]
 ---
 ## ![](resources/O.png).manual[nce upon a time...]
 ???
@@ -160,7 +169,7 @@ _But with the help of right tools, writing tests can certainly be simpler and mo
 
 -- [Rajat S](https://blog.bitsrc.io/testing-react-apps-with-cypress-658bc482678)
 ---
-## 🔍 Let's focus on .inline[![](resources/cypress.png)]
+## 🔍 Let's focus on .cypress[![](resources/cypress.png)]
 How does it answer to those complaints ?
 ---
 ### What is Cypress?
