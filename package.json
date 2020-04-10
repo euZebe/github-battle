@@ -10,7 +10,7 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
-    "auth0-js": "^9.0.0",
+    "auth0-js": "^9.13.2",
     "axios": "^0.18.0",
     "query-string": "^6.2.0",
     "react": "^15.5.4",
